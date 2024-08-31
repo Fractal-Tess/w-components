@@ -1,0 +1,29 @@
+{
+  "name": "@repo/lit-tailwind",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.global.js"
+    }
+  },
+  "scripts": {
+    "build": "pnpm build:styles && tsup",
+    "dev": "concurrently --prefix-colors 'green.bold,blue.bold' \"pnpm build:styles:watch\"   \"tsup --watch\" ",
+    "build:styles": "tailwindcss -i ./src/globals.css -o ./.tw2lit/output.css --minify && node ./tw2lit.js --input ./.tw2lit/output.css --output ./.tw2lit/tw2lit.styles.js",
+    "build:styles:watch": "concurrently  \"tailwindcss -i ./src/globals.css -o ./.tw2lit/output.css --watch\" \"node ./tw2lit.js --input ./.tw2lit/output.css --output ./.tw2lit/tw2lit.styles.js --watch\"",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "lit": "^3.2.0",
+    "tailwindcss": "^3.4.4",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "yargs": "^17.7.2"
+  }
+}
