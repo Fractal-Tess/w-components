@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import {TWStyles} from 'tw2lit'
 
 @customElement('my-counter')
-class MyElement extends LitElement {
-  static styles = [TWStyles]
+export class MyElement extends LitElement {
+  static override styles = [TWStyles]
 
   @property({type: Number})
   accessor count:number
@@ -18,12 +18,12 @@ class MyElement extends LitElement {
     this.count += 1;
   }
 
-  render() {
+  override render() {
     const {count, incrementCounter} = this
 
     return html`
-      <div>
-        <p class="text-emerald-500 p-4">Counter: ${count}</p>
+      <div class='bg-slate-400 inline-flex flex-col'>
+        <p class="p-4">Counter: ${count}</p>
         <button @click=${incrementCounter}>Increment</button>
       </div>
     `;
