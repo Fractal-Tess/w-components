@@ -4,27 +4,34 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('my-counter')
 export class Input extends LitElement {
 
-static styles = css`
+  static override styles = css`
     :host {
       display: inline-block;
       padding: 10px;
-      background: lightgray;
-    }
-    .planet {
-      color: var(--planet-color, blue);
+      background: slategrey
     }
   `;
 
-  @property({ type: String }) label = 'Increment counter';
-  @property({ type: Number }) count = 0;
+  @property({type: Number})
+  accessor count:number
 
-  render() {
-    return html`
-        <button @click=${this.inc} class="planet">${this.label}</button>
-    `;
+  constructor() {
+    super();
+    this.count = 0
   }
 
-  inc(){
-    this.count++;
+  incrementCounter() {
+    this.count += 1;
+  }
+
+  override render() {
+    const {count, incrementCounter} = this
+
+    return html`
+      <div>
+        <p>Counter: ${count}</p>
+        <button @click=${incrementCounter}>Increment</button>
+      </div>
+    `;
   }
 }
